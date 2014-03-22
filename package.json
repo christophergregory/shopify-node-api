@@ -1,0 +1,28 @@
+{
+  "name": "shopify-node-api",
+  "version": "0.1.0",
+  "description": "OAuth2 Module for Shopify API",
+  "main": "./lib/shopify",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sinechris/shopify-node-api.git"
+  },
+  "keywords": [
+    "Shopify",
+    "api",
+    "node.js",
+    "oauth2"
+  ],
+  "author": "Chris Gregory <chris@sinelabs.com> (http://sinelabs.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sinechris/shopify-node-api/issues"
+  },
+  "homepage": "https://github.com/sinechris/shopify-node-api",
+  "dependencies": {
+    "MD5": "^1.2.0"
+  }
+}
