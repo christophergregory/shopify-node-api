@@ -131,3 +131,17 @@ Shopify.delete('/admin/products/1234567.json', function(data){
     console.log(data);
 });
 ~~~
+
+## OPTIONS
+
+
+### Verbose Mode
+
+By default, shopify-node-api will automatically console.log all headers and responsed. To suppress these messages, simply set verbose to false.
+
+~~~
+var config = {
+  ...
+  verbose: false
+}
+~~~
