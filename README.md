@@ -56,9 +56,9 @@ app.get('/finish_auth', function(req, res){
   var Shopify = new shopifyAPI(config), // You need to pass in your config here
     query_params = req.query;
     
-  Shopify.exchange_temporary_token(query_params, function(data){
+  Shopify.exchange_temporary_token(query_params, function(err, data){
     // This will return successful if the request was authentic from Shopify
-    // Otherwise an error with a message will be returned. 
+    // Otherwise err will be non-null.
     // The module will automatically update your config with the new access token
     // It is also available here as data['access_token']
   });
@@ -75,7 +75,7 @@ This module supports GET, POST, PUT and DELETE rest verbs.
 ### GET
 
 ~~~
-Shopify.get('/admin/products.json', function(data){
+Shopify.get('/admin/products.json', function(err, data){
     console.log(data); // Data contains product json information
 });
 
@@ -105,7 +105,7 @@ var post_data = {
   }
 }
 
-Shopify.post('/admin/products/1234567.json', post_data, function(data){
+Shopify.post('/admin/products/1234567.json', post_data, function(err, data){
   console.log(data);
 });
 ~~~
@@ -119,7 +119,7 @@ var put_data = {
   }
 }
 
-Shopify.put('/admin/products/1234567.json', put_data, function(data){
+Shopify.put('/admin/products/1234567.json', put_data, function(err, data){
   console.log(data);
 });
 ~~~
@@ -127,7 +127,7 @@ Shopify.put('/admin/products/1234567.json', put_data, function(data){
 ### DELETE
 
 ~~~
-Shopify.delete('/admin/products/1234567.json', function(data){
+Shopify.delete('/admin/products/1234567.json', function(err, data){
     console.log(data);
 });
 ~~~
