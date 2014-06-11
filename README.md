@@ -26,6 +26,21 @@ var Shopify = new shopifyAPI({
 
 ~~~
 
+### CAUTION!!!
+
+If no config object is passed into the module upon initialization, an error will be thrown!
+
+~~~
+var Shopify = new shopifyAPI(); // No config object passed in
+~~~
+
+will throw an error like:
+
+~~~
+> Error: ShopifyAPI module expects a config object
+> Please see documentation at: https://github.com/sinechris/shopify-node-api
+~~~
+
 ## Usage
 
 ~~~
@@ -78,8 +93,8 @@ An important header to take note of is **'http_x_shopify_shop_api_call_limit'**.
 
 ~~~
 function callback(err, data, headers) {
-	var api_limit = headers['http_x_shopify_shop_api_call_limit'];
-	console.log( api_limit ); // "1/40"
+  var api_limit = headers['http_x_shopify_shop_api_call_limit'];
+  console.log( api_limit ); // "1/40"
 }
 ~~~
 
@@ -149,7 +164,7 @@ Shopify.delete('/admin/products/1234567.json', function(err, data, headers){
 
 ### Verbose Mode
 
-By default, shopify-node-api will automatically console.log all headers and responsed. To suppress these messages, simply set verbose to false.
+By default, shopify-node-api will automatically console.log all headers and responses. To suppress these messages, simply set verbose to false.
 
 ~~~
 var config = {
