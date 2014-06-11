@@ -174,6 +174,13 @@ var config = {
 ~~~
 
 
+# Testing
+
+~~~
+npm test
+~~~
+
+
 # Contributing
 
 Shopify has been kind enough to list this module on their [Official Documentation](http://docs.shopify.com/api/libraries/node). As such it is important that this module remain as bug free and up to date as possible in order to make the experience with node.js/Shopify as seamless as possible.
