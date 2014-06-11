@@ -13,7 +13,7 @@ npm install shopify-node-api
 
 ## Setup
 
-~~~ 
+~~~
 var shopifyAPI = require('shopify-node-api');
 
 var Shopify = new shopifyAPI({
@@ -23,7 +23,7 @@ var Shopify = new shopifyAPI({
                 shopify_scope: 'write_products',
                 redirect_uri: 'http://localhost:3000/finish_auth'
             });
-            
+
 ~~~
 
 ## Usage
@@ -34,7 +34,7 @@ var Shopify = new shopifyAPI({
 
 var auth_url = Shopify.buildAuthURL();
 
-// Assuming you are using the express framework 
+// Assuming you are using the express framework
 // you can redirect the user automatically like so
 res.redirect(auth_url);
 
@@ -43,9 +43,9 @@ res.redirect(auth_url);
 
 ## Exchanging the temporary token for a permanent one
 
-After the user visits the authenticaion url they will be redirected to the location you specified in the configuration redirect_url parameter. 
+After the user visits the authenticaion url they will be redirected to the location you specified in the configuration redirect_url parameter.
 
-Shopify will send along some query parameters including: code (your temporary token), signature, shop and timestamp. This module will verify the authenticity of the request from shopify as outlined here in the [Shopify OAuth Docs](http://docs.shopify.com/api/tutorials/oauth) 
+Shopify will send along some query parameters including: code (your temporary token), signature, shop and timestamp. This module will verify the authenticity of the request from shopify as outlined here in the [Shopify OAuth Docs](http://docs.shopify.com/api/tutorials/oauth)
 
 ~~~
 
@@ -55,7 +55,7 @@ app.get('/finish_auth', function(req, res){
 
   var Shopify = new shopifyAPI(config), // You need to pass in your config here
     query_params = req.query;
-    
+
   Shopify.exchange_temporary_token(query_params, function(err, data){
     // This will return successful if the request was authentic from Shopify
     // Otherwise err will be non-null.
@@ -70,13 +70,25 @@ app.get('/finish_auth', function(req, res){
 
 ## Making requests
 
-This module supports GET, POST, PUT and DELETE rest verbs. 
+This module supports GET, POST, PUT and DELETE rest verbs. Each request will return any errors, the data in JSON formation and any headers returned by the request.
+
+An important header to take note of is **'http_x_shopify_shop_api_call_limit'**. This will let you know if you are getting close to reaching [Shopify's API call limit](http://docs.shopify.com/api/tutorials/learning-to-respect-the-api-call-limit).
+
+### API limits
+
+~~~
+function callback(err, data, headers) {
+	var api_limit = headers['http_x_shopify_shop_api_call_limit'];
+	console.log( api_limit ); // "1/40"
+}
+~~~
 
 ### GET
 
 ~~~
-Shopify.get('/admin/products.json', function(err, data){
+Shopify.get('/admin/products.json', function(err, data, headers){
     console.log(data); // Data contains product json information
+    console.log(headers); // Headers returned from request
 });
 
 ~~~
@@ -105,7 +117,7 @@ var post_data = {
   }
 }
 
-Shopify.post('/admin/products/1234567.json', post_data, function(err, data){
+Shopify.post('/admin/products/1234567.json', post_data, function(err, data, headers){
   console.log(data);
 });
 ~~~
@@ -119,7 +131,7 @@ var put_data = {
   }
 }
 
-Shopify.put('/admin/products/1234567.json', put_data, function(err, data){
+Shopify.put('/admin/products/1234567.json', put_data, function(err, data, headers){
   console.log(data);
 });
 ~~~
@@ -127,7 +139,7 @@ Shopify.put('/admin/products/1234567.json', put_data, function(err, data){
 ### DELETE
 
 ~~~
-Shopify.delete('/admin/products/1234567.json', function(err, data){
+Shopify.delete('/admin/products/1234567.json', function(err, data, headers){
     console.log(data);
 });
 ~~~
@@ -145,3 +157,10 @@ var config = {
   verbose: false
 }
 ~~~
+
+
+# Contributing
+
+Shopify has been kind enough to list this module on their [Official Documentation](http://docs.shopify.com/api/libraries/node). As such it is important that this module remain as bug free and up to date as possible in order to make the experience with node.js/Shopify as seamless as possible.
+
+Sinelabs will continue to make updates as often as possible but we are more than happy to review any feature requests and will be accepting pull requests as well.
