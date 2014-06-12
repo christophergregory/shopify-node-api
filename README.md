@@ -186,3 +186,5 @@ npm test
 Shopify has been kind enough to list this module on their [Official Documentation](http://docs.shopify.com/api/libraries/node). As such it is important that this module remain as bug free and up to date as possible in order to make the experience with node.js/Shopify as seamless as possible.
 
 Sinelabs will continue to make updates as often as possible but we are more than happy to review any feature requests and will be accepting pull requests as well.
+
+Special thanks to [robotmayo](https://github.com/robotmayo) & [jarofghosts](https://github.com/jarofghosts) for the helpful tips and contributions!
