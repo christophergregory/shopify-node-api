@@ -2,13 +2,23 @@ var should = require('chai').should(),
     expect = require('chai').expect,
     shopifyAPI = require('../lib/shopify.js');
 
-describe('Intial Setup: ShopifyAPI', function(){
+describe('Constructor Function: #shopifyAPI', function(){
 
     it('throws error if no config object is passed in', function(){
         var msg = "ShopifyAPI module expects a config object\nPlease see documentation at: https://github.com/sinechris/shopify-node-api\n";
         expect(function(){
             var Shopify = new shopifyAPI();
         }).to.throw(msg);
+    });
+
+    it('returns instanceof shopifyAPI with "new" keyword', function(){
+        var Shopify = new shopifyAPI({});
+        expect(Shopify).to.be.a.instanceof(shopifyAPI);
+    });
+
+    it('returns instanceof shopifyAPI without "new" keyword', function(){
+        var Shopify = shopifyAPI({});
+        expect(Shopify).to.be.a.instanceof(shopifyAPI);
     });
 
 });
@@ -23,9 +33,6 @@ describe('#buildAuthURL', function(){
                 redirect_uri: 'http://localhost:3000/finish_auth'
             });
 
-    it('returns a string', function(){
-        Shopify.buildAuthURL().should.be.a('string');
-    });
 
     it('builds correct string', function(){
         var auth_url = Shopify.buildAuthURL(),
@@ -60,8 +67,22 @@ describe('#set_access_token', function(){
             .equal(fake_token);
     });
 
-    it('should be a string', function(){
-        Shopify.config.access_token.should.be.a('string');
-    });
+});
 
+describe('#is_valid_signature', function(){
+    it('calculates correct signature', function(){
+
+        // Values used below were pre-calculated and not part
+        // of an actual shop.
+
+        var Shopify = shopifyAPI({}),
+            params = {
+                code: 'di389so32hwh28923823dh3289329hdd',
+                shop: 'testy-tester.myshopify.com',
+                timestamp: '1402539839',
+                signature: '0132e77d7fb358ecd4645d86cfc39d27'
+            };
+
+        expect(Shopify.is_valid_signature(params)).to.equal(true);
+    });
 });
