@@ -23,10 +23,11 @@
   },
   "homepage": "https://github.com/sinechris/shopify-node-api",
   "dependencies": {
-    "MD5": "^1.2.0"
+    "MD5": "^1.2.1"
   },
   "devDependencies": {
     "mocha": "^1.20.1",
-    "chai": "^1.9.1"
+    "chai": "^1.9.1",
+    "nock": "^0.34.1"
   }
 }
