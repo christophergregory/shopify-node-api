@@ -188,3 +188,7 @@ Shopify has been kind enough to list this module on their [Official Documentatio
 Sinelabs will continue to make updates as often as possible but we are more than happy to review any feature requests and will be accepting pull requests as well.
 
 Special thanks to [robotmayo](https://github.com/robotmayo) & [jarofghosts](https://github.com/jarofghosts) for the helpful tips and contributions!
+
+# Donations 
+
+If you would like contribute in a small way or just say thanks, I gratefully accept [gittip](https://www.gittip.com/sinechris/).
