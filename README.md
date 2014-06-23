@@ -16,6 +16,7 @@ npm install shopify-node-api
 ~~~
 var shopifyAPI = require('shopify-node-api');
 
+
 var Shopify = new shopifyAPI({
                 shop: 'MYSHOP', // MYSHOP.myshopify.com
                 shopify_api_key: '', // Your API key
@@ -81,6 +82,21 @@ app.get('/finish_auth', function(req, res){
 });
 
 ~~~
+
+### Note:
+
+Once you have initially received your access token you can instantiate a new instance at a later date like so:
+
+~~~
+var Shopify = new shopifyAPI({
+                shop: 'MYSHOP', // MYSHOP.myshopify.com
+                shopify_api_key: '', // Your API key
+                shopify_shared_secret: '', // Your Shared Secret
+                access_token: 'token', //permanent token
+            });
+
+~~~
+
 
 
 ## Making requests
@@ -189,6 +205,6 @@ Sinelabs will continue to make updates as often as possible but we are more than
 
 Special thanks to [robotmayo](https://github.com/robotmayo) & [jarofghosts](https://github.com/jarofghosts) for the helpful tips and contributions!
 
-# Donations 
+# Donations
 
-If you would like contribute in a small way or just say thanks, I gratefully accept [gittip](https://www.gittip.com/sinechris/).
+If you would like to contribute in a small way or just say thanks, I gratefully accept [gittip](https://www.gittip.com/sinechris/).
