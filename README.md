@@ -3,13 +3,7 @@ shopify-node-api
 
 OAuth2 Module for Shopify API
 
-## Installation
-
-### [Node.js](http://nodejs.org/):
-
-```
-npm install shopify-node-api
-```
+[![NPM](https://nodei.co/npm/shopify-node-api.png?downloads=true&stars=true)](https://nodei.co/npm/shopify-node-api/)
 
 ## Setup
 
