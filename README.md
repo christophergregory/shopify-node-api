@@ -148,7 +148,7 @@ var post_data = {
   }
 }
 
-Shopify.post('/admin/products/1234567.json', post_data, function(err, data, headers){
+Shopify.post('/admin/products.json', post_data, function(err, data, headers){
   console.log(data);
 });
 ~~~
