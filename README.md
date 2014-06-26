@@ -184,6 +184,20 @@ var config = {
 ~~~
 
 
+### API Call Limit Options
+
+By default, shopify-node-api will automatically wait if you approach Shopify's API call limit. The default setting for backoff delay time is 1 second if you reach 35 out of 40 calls. If you hit the limit, Shopify will return a 429 error, and by default, this module will have a rate limit delay time of 10 seconds. You can modify these options using the following parameters: 
+
+~~~
+var config = {
+  ...
+  rate_limit_delay: 10000, // 10 seconds (in ms) => if Shopify returns 429 response code
+  backoff: 35, // limit X of 40 API calls => default is 35 of 40 API calls
+  backoff_delay: 1000 // 1 second (in ms) => wait 1 second if backoff option is exceeded
+}
+~~~
+
+
 # Testing
 
 ~~~
