@@ -183,6 +183,31 @@ var config = {
 }
 ~~~
 
+### Verify Shopify Request
+
+From the [shopify docs](http://docs.shopify.com/api/tutorials/oauth):
+
+"All requests/redirects from Shopify include a signature parameter that can be used to verify the origin of the request."
+
+The module utilizes the *is_valid_signature* function to very that requests coming from shopify are authentic. You can use this method in your code to verify requests from Shopify. Here is an example of its use in the this module:
+
+~~~
+ShopifyAPI.prototype.exchange_temporary_token = function(query_params, callback) {
+    
+    # Return an error if signature is not valid
+    if (!self.is_valid_signature(query_params)) {
+        return callback(new Error("Signature is not authentic!"));
+    }
+
+    ...
+}
+~~~
+
+You can call it from an initialized Shopify object like so
+
+~~~
+Shopify.is_valid_signature(query_params);
+~~~
 
 ### API Call Limit Options
 
