@@ -3,7 +3,7 @@ shopify-node-api
 
 OAuth2 Module for Shopify API
 
-[![NPM](https://nodei.co/npm/shopify-node-api.png?downloads=true&stars=true)](https://nodei.co/npm/shopify-node-api/)
+[![NPM](https://nodei.co/npm/shopify-node-api.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/shopify-node-api/)
 
 ## Setup
 
