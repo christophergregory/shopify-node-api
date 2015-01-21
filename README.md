@@ -16,7 +16,8 @@ var Shopify = new shopifyAPI({
                 shopify_api_key: '', // Your API key
                 shopify_shared_secret: '', // Your Shared Secret
                 shopify_scope: 'write_products',
-                redirect_uri: 'http://localhost:3000/finish_auth'
+                redirect_uri: 'http://localhost:3000/finish_auth',
+                shopify_password: '' // Your password *for private apps*
             });
 
 ~~~
