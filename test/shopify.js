@@ -88,6 +88,40 @@ describe('#is_valid_signature', function(){
     });
 });
 
+describe('#exchange_temporary_token', function(){
+    it('should exchange a temporary token', function(done){
+
+        // Values used below were pre-calculated and not part
+        // of an actual shop.
+
+        var Shopify = shopifyAPI({
+                shop: 'myshop',
+                shopify_api_key: 'abc123',
+                shopify_shared_secret: 'asdf1234',
+                verbose: false
+            }),
+            params = {
+                code: 'di389so32hwh28923823dh3289329hdd',
+                timestamp: '1402539839',
+                signature: '679edfa2ebd05b2abcbb15b7fdc72934'
+            };
+
+        var shopifyTokenFetch = nock('https://myshop.myshopify.com')
+            .post('/admin/oauth/access_token')
+            .reply(200, {
+                "access_token": "abcd"
+            });
+
+        Shopify.exchange_temporary_token(params, function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          shopifyTokenFetch.done();
+          done();
+        });
+    });
+});
+
 describe('#get', function(){
    it('should return correct response', function(done){
 
