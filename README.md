@@ -81,17 +81,18 @@ app.get('/finish_auth', function(req, res){
 
 Once you have initially received your access token you can instantiate a new instance at a later date like so:
 
+*Private Apps:*
+If you working on private apps you can just instanciate same as before just pass your password in the `access_token` parameter.
+
 ~~~
 var Shopify = new shopifyAPI({
                 shop: 'MYSHOP', // MYSHOP.myshopify.com
                 shopify_api_key: '', // Your API key
                 shopify_shared_secret: '', // Your Shared Secret
-                access_token: 'token', //permanent token
+                access_token: 'token', //permanent token or password for private apps
             });
 
 ~~~
-
-
 
 ## Making requests
 
