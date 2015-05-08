@@ -185,9 +185,11 @@ var config = {
 
 ### Verify Shopify Request
 
+**Note**: *This module has been updated to use HMAC parameter instead of the deprecated "signature"*.
+
 From the [shopify docs](http://docs.shopify.com/api/tutorials/oauth):
 
-"All requests/redirects from Shopify include a signature parameter that can be used to verify the origin of the request."
+"Every request or redirect from Shopify to the client server includes a signature and hmac parameters that can be used to ensure that it came from Shopify. **The signature attribute is deprecated due to vulnerabilities in how the signature is generated.**"
 
 The module utilizes the *is_valid_signature* function to very that requests coming from shopify are authentic. You can use this method in your code to verify requests from Shopify. Here is an example of its use in the this module:
 

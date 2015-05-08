@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/sinechris/shopify-node-api",
   "dependencies": {
-    "MD5": "^1.2.1"
+    "crypto": "0.0.3"
   },
   "devDependencies": {
     "mocha": "^1.20.1",

@@ -76,12 +76,15 @@ describe('#is_valid_signature', function(){
         // Values used below were pre-calculated and not part
         // of an actual shop.
 
-        var Shopify = shopifyAPI({}),
+        var Shopify = shopifyAPI({
+                shopify_shared_secret: 'hush'
+            }),
             params = {
-                code: 'di389so32hwh28923823dh3289329hdd',
-                shop: 'testy-tester.myshopify.com',
-                timestamp: '1402539839',
-                signature: '0132e77d7fb358ecd4645d86cfc39d27'
+                'shop': 'some-shop.myshopify.com',
+                'code': 'a94a110d86d2452eb3e2af4cfb8a3828',
+                'timestamp': '1337178173',
+                'signature': '6e39a2ea9e497af6cb806720da1f1bf3',
+                'hmac': '2cb1a277650a659f1b11e92a4a64275b128e037f2c3390e3c8fd2d8721dac9e2'
             };
 
         expect(Shopify.is_valid_signature(params)).to.equal(true);
@@ -97,13 +100,15 @@ describe('#exchange_temporary_token', function(){
         var Shopify = shopifyAPI({
                 shop: 'myshop',
                 shopify_api_key: 'abc123',
-                shopify_shared_secret: 'asdf1234',
+                shopify_shared_secret: 'hush',
                 verbose: false
             }),
             params = {
-                code: 'di389so32hwh28923823dh3289329hdd',
-                timestamp: '1402539839',
-                signature: '679edfa2ebd05b2abcbb15b7fdc72934'
+                'shop': 'some-shop.myshopify.com',
+                'code': 'a94a110d86d2452eb3e2af4cfb8a3828',
+                'timestamp': '1337178173',
+                'signature': '6e39a2ea9e497af6cb806720da1f1bf3',
+                'hmac': '2cb1a277650a659f1b11e92a4a64275b128e037f2c3390e3c8fd2d8721dac9e2'
             };
 
         var shopifyTokenFetch = nock('https://myshop.myshopify.com')
