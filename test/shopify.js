@@ -125,6 +125,37 @@ describe('#exchange_temporary_token', function(){
           done();
         });
     });
+
+    it('should return an error object with a legible message', function(done) {
+        var Shopify = shopifyAPI({
+                shop: 'myshop',
+                shopify_api_key: 'abc123',
+                shopify_shared_secret: 'hush',
+                verbose: false
+            }),
+            params = {
+                'shop': 'some-shop.myshopify.com',
+                'code': 'a94a110d86d2452eb3e2af4cfb8a3828',
+                'timestamp': '1337178173',
+                'signature': '6e39a2ea9e497af6cb806720da1f1bf3',
+                'hmac': '2cb1a277650a659f1b11e92a4a64275b128e037f2c3390e3c8fd2d8721dac9e2'
+            };
+
+        // Shopify will return an invalid request in some cases, e.g. if a code
+        // is not valid for exchanging to a permanent token.
+        var shopifyTokenFetch = nock('https://myshop.myshopify.com')
+            .post('/admin/oauth/access_token')
+            .reply(400, {
+                error: "invalid_request"
+            });
+
+        Shopify.exchange_temporary_token(params, function(err, res) {
+          shopifyTokenFetch.done();
+          expect(err).to.be.instanceof(Error);
+          expect(err.message).to.equal("invalid_request");
+          done();
+        });
+    });
 });
 
 describe('#get', function(){
