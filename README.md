@@ -7,6 +7,7 @@ OAuth2 Module for Shopify API
 
 ## Setup
 
+#### Public Apps
 ~~~
 var shopifyAPI = require('shopify-node-api');
 
@@ -16,10 +17,27 @@ var Shopify = new shopifyAPI({
                 shopify_api_key: '', // Your API key
                 shopify_shared_secret: '', // Your Shared Secret
                 shopify_scope: 'write_products',
-                redirect_uri: 'http://localhost:3000/finish_auth'
+                redirect_uri: 'http://localhost:3000/finish_auth',
+                nonce: '' // a randomly selected value unique for each authorization request
             });
 
 ~~~
+
+
+#### Private Apps
+~~~
+var shopifyAPI = require('shopify-node-api');
+
+
+var Shopify = new shopifyAPI({
+                shop: 'MYSHOP', // MYSHOP.myshopify.com
+                shopify_api_key: '', // Your API key
+                access_token: '' // Your API password
+            });
+
+~~~
+
+Note that if you are building a [private Shopify app](https://docs.shopify.com/api/authentication/creating-a-private-app), then you don't need to go through the OAuth authentication process. You can skip ahead to the Making Requests section.
 
 ### CAUTION!!!
 
@@ -55,7 +73,7 @@ res.redirect(auth_url);
 
 After the user visits the authenticaion url they will be redirected to the location you specified in the configuration redirect_url parameter.
 
-Shopify will send along some query parameters including: code (your temporary token), signature, shop and timestamp. This module will verify the authenticity of the request from shopify as outlined here in the [Shopify OAuth Docs](http://docs.shopify.com/api/tutorials/oauth)
+Shopify will send along some query parameters including: code (your temporary token), signature, shop, state and timestamp. This module will verify the authenticity of the request from shopify as outlined here in the [Shopify OAuth Docs](http://docs.shopify.com/api/tutorials/oauth)
 
 ~~~
 

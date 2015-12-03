@@ -31,13 +31,14 @@ describe('#buildAuthURL', function(){
                 shopify_api_key: 'abc123',
                 shopify_shared_secret: 'asdf1234',
                 shopify_scope: 'write_products',
-                redirect_uri: 'http://localhost:3000/finish_auth'
+                redirect_uri: 'http://localhost:3000/finish_auth',
+                nonce: 'abc123'
             });
 
 
     it('builds correct string', function(){
         var auth_url = Shopify.buildAuthURL(),
-            correct_auth_url = 'https://MYSHOP.myshopify.com/admin/oauth/authorize?client_id=abc123&scope=write_products&redirect_uri=http://localhost:3000/finish_auth';
+            correct_auth_url = 'https://MYSHOP.myshopify.com/admin/oauth/authorize?client_id=abc123&scope=write_products&redirect_uri=http://localhost:3000/finish_auth&state=abc123';
         auth_url.should.equal(correct_auth_url);
     });
 
@@ -77,14 +78,16 @@ describe('#is_valid_signature', function(){
         // of an actual shop.
 
         var Shopify = shopifyAPI({
-                shopify_shared_secret: 'hush'
+                shopify_shared_secret: 'hush',
+                nonce: 'abc123'
             }),
             params = {
                 'shop': 'some-shop.myshopify.com',
                 'code': 'a94a110d86d2452eb3e2af4cfb8a3828',
                 'timestamp': '1337178173',
                 'signature': '6e39a2ea9e497af6cb806720da1f1bf3',
-                'hmac': '2cb1a277650a659f1b11e92a4a64275b128e037f2c3390e3c8fd2d8721dac9e2'
+                'hmac': '62c96e47cdef32a33c6fa78d761e049b3578b8fc115188a9ffcd774937ab7c78',
+                'state': 'abc123'
             };
 
         expect(Shopify.is_valid_signature(params)).to.equal(true);
@@ -101,14 +104,16 @@ describe('#exchange_temporary_token', function(){
                 shop: 'myshop',
                 shopify_api_key: 'abc123',
                 shopify_shared_secret: 'hush',
-                verbose: false
+                verbose: false,
+                nonce: 'abc123'
             }),
             params = {
                 'shop': 'some-shop.myshopify.com',
                 'code': 'a94a110d86d2452eb3e2af4cfb8a3828',
                 'timestamp': '1337178173',
                 'signature': '6e39a2ea9e497af6cb806720da1f1bf3',
-                'hmac': '2cb1a277650a659f1b11e92a4a64275b128e037f2c3390e3c8fd2d8721dac9e2'
+                'hmac': '62c96e47cdef32a33c6fa78d761e049b3578b8fc115188a9ffcd774937ab7c78',
+                'state': 'abc123'
             };
 
         var shopifyTokenFetch = nock('https://myshop.myshopify.com')
@@ -131,14 +136,16 @@ describe('#exchange_temporary_token', function(){
                 shop: 'myshop',
                 shopify_api_key: 'abc123',
                 shopify_shared_secret: 'hush',
-                verbose: false
+                verbose: false,
+                nonce: 'abc123'
             }),
             params = {
                 'shop': 'some-shop.myshopify.com',
                 'code': 'a94a110d86d2452eb3e2af4cfb8a3828',
                 'timestamp': '1337178173',
                 'signature': '6e39a2ea9e497af6cb806720da1f1bf3',
-                'hmac': '2cb1a277650a659f1b11e92a4a64275b128e037f2c3390e3c8fd2d8721dac9e2'
+                'hmac': '62c96e47cdef32a33c6fa78d761e049b3578b8fc115188a9ffcd774937ab7c78',
+                'state': 'abc123'
             };
 
         // Shopify will return an invalid request in some cases, e.g. if a code
