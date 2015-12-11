@@ -209,7 +209,7 @@ From the [shopify docs](http://docs.shopify.com/api/tutorials/oauth):
 
 "Every request or redirect from Shopify to the client server includes a signature and hmac parameters that can be used to ensure that it came from Shopify. **The signature attribute is deprecated due to vulnerabilities in how the signature is generated.**"
 
-The module utilizes the *is_valid_signature* function to very that requests coming from shopify are authentic. You can use this method in your code to verify requests from Shopify. Here is an example of its use in the this module:
+The module utilizes the *is_valid_signature* function to verify that requests coming from shopify are authentic. You can use this method in your code to verify requests from Shopify. Here is an example of its use in the this module:
 
 ~~~
 ShopifyAPI.prototype.exchange_temporary_token = function(query_params, callback) {
