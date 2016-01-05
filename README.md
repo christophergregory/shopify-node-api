@@ -229,6 +229,13 @@ You can call it from an initialized Shopify object like so
 Shopify.is_valid_signature(query_params);
 ~~~
 
+To verify a Shopify signature that does not contain a state parameter, just pass true as the second argument of `is_valid_signature`:
+
+~~~
+Shopify.is_valid_signature(query_params, true);
+~~~
+*This is required when checking a non-authorization query string, for example the query string passed when the app is clicked in the user's app store*
+
 ### API Call Limit Options
 
 By default, shopify-node-api will automatically wait if you approach Shopify's API call limit. The default setting for backoff delay time is 1 second if you reach 35 out of 40 calls. If you hit the limit, Shopify will return a 429 error, and by default, this module will have a rate limit delay time of 10 seconds. You can modify these options using the following parameters: 
