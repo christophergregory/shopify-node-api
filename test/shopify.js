@@ -208,6 +208,27 @@ describe('#get', function(){
         });
 
    });
+
+   it('should parse a number too large for javascript into a string', function(done) {
+     var shopify_get = nock('https://myshop.myshopify.com')
+                         .get('/admin/orders.json')
+                         .reply(200, '{"id": 9223372036854775807}');
+
+     var Shopify = shopifyAPI({
+       shop: 'myshop',
+       shopify_api_key: 'abc123',
+       shopify_shared_secret: 'asdf1234',
+       shopify_scope: 'write_products',
+       redirect_uri: 'http://localhost:3000/finish_auth',
+       verbose: false
+     });
+
+
+     Shopify.get('/admin/orders.json', function(err, data, headers){
+       expect(data.id.toString()).to.equal('9223372036854775807');
+       done();
+     });
+   });
 });
 
 describe('#post', function(){
