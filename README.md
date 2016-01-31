@@ -18,7 +18,7 @@ var Shopify = new shopifyAPI({
                 shopify_shared_secret: '', // Your Shared Secret
                 shopify_scope: 'write_products',
                 redirect_uri: 'http://localhost:3000/finish_auth',
-                nonce: '' // a randomly selected value unique for each authorization request
+                nonce: '' // you must provide a randomly selected value unique for each authorization request
             });
 
 ~~~
@@ -213,7 +213,7 @@ The module utilizes the *is_valid_signature* function to verify that requests co
 
 ~~~
 ShopifyAPI.prototype.exchange_temporary_token = function(query_params, callback) {
-    
+
     # Return an error if signature is not valid
     if (!self.is_valid_signature(query_params)) {
         return callback(new Error("Signature is not authentic!"));
@@ -238,7 +238,7 @@ Shopify.is_valid_signature(query_params, true);
 
 ### API Call Limit Options
 
-By default, shopify-node-api will automatically wait if you approach Shopify's API call limit. The default setting for backoff delay time is 1 second if you reach 35 out of 40 calls. If you hit the limit, Shopify will return a 429 error, and by default, this module will have a rate limit delay time of 10 seconds. You can modify these options using the following parameters: 
+By default, shopify-node-api will automatically wait if you approach Shopify's API call limit. The default setting for backoff delay time is 1 second if you reach 35 out of 40 calls. If you hit the limit, Shopify will return a 429 error, and by default, this module will have a rate limit delay time of 10 seconds. You can modify these options using the following parameters:
 
 ~~~
 var config = {
