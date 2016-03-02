@@ -5,14 +5,12 @@ OAuth2 Module for Shopify API
 
 [![NPM](https://nodei.co/npm/shopify-node-api.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/shopify-node-api/)
 
-## Setup
-
-#### Install
+## Install
 ```
 npm install -S shopify-node-api
 ```
 
-#### Public Apps
+## Configure Public App
 
 ```js
 var shopifyAPI = require('shopify-node-api');
@@ -30,7 +28,7 @@ var Shopify = new shopifyAPI({
 ```
 
 
-#### Private Apps
+## Configure Private App
 ```js
 var shopifyAPI = require('shopify-node-api');
 
