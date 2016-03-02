@@ -7,7 +7,13 @@ OAuth2 Module for Shopify API
 
 ## Setup
 
+#### Install
+```
+npm install -S shopify-node-api
+```
+
 #### Public Apps
+
 ```js
 var shopifyAPI = require('shopify-node-api');
 
