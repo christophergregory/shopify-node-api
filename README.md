@@ -17,13 +17,13 @@ var shopifyAPI = require('shopify-node-api');
 
 
 var Shopify = new shopifyAPI({
-                shop: 'MYSHOP', // MYSHOP.myshopify.com
-                shopify_api_key: '', // Your API key
-                shopify_shared_secret: '', // Your Shared Secret
-                shopify_scope: 'write_products',
-                redirect_uri: 'http://localhost:3000/finish_auth',
-                nonce: '' // you must provide a randomly selected value unique for each authorization request
-            });
+  shop: 'MYSHOP', // MYSHOP.myshopify.com
+  shopify_api_key: '', // Your API key
+  shopify_shared_secret: '', // Your Shared Secret
+  shopify_scope: 'write_products',
+  redirect_uri: 'http://localhost:3000/finish_auth',
+  nonce: '' // you must provide a randomly selected value unique for each authorization request
+});
 
 ```
 
@@ -34,10 +34,10 @@ var shopifyAPI = require('shopify-node-api');
 
 
 var Shopify = new shopifyAPI({
-                shop: 'MYSHOP', // MYSHOP.myshopify.com
-                shopify_api_key: '', // Your API key
-                access_token: '' // Your API password
-            });
+  shop: 'MYSHOP', // MYSHOP.myshopify.com
+  shopify_api_key: '', // Your API key
+  access_token: '' // Your API password
+});
 ```
 
 Note that if you are building a [private Shopify app](https://docs.shopify.com/api/authentication/creating-a-private-app), then you don't need to go through the OAuth authentication process. You can skip ahead to the Making Requests section.
