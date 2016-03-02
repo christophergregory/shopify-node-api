@@ -12,6 +12,8 @@ npm install -S shopify-node-api
 
 ## Configure Public App
 
+Public apps are apps intended to appear in the [Shopify App Store](https://apps.shopify.com) and require OAuth2 to access shop data.
+
 ```js
 var shopifyAPI = require('shopify-node-api');
 
@@ -29,6 +31,9 @@ var Shopify = new shopifyAPI({
 
 
 ## Configure Private App
+
+Private apps are created for a single shop and do not appear in the shopify app store. [More info here.](https://docs.shopify.com/api/guides/introduction/creating-a-private-app)
+
 ```js
 var shopifyAPI = require('shopify-node-api');
 
@@ -40,7 +45,8 @@ var Shopify = new shopifyAPI({
 });
 ```
 
-Note that if you are building a [private Shopify app](https://docs.shopify.com/api/authentication/creating-a-private-app), then you don't need to go through the OAuth authentication process. You can skip ahead to the Making Requests section.
+Note: If you are building a [private Shopify app](https://docs.shopify.com/api/authentication/creating-a-private-app), then you don't need to go through the OAuth authentication process. You can skip ahead to the Making Requests section.
+
 
 ### CAUTION!!!
 
@@ -102,11 +108,11 @@ Once you have initially received your access token you can instantiate a new ins
 
 ```js
 var Shopify = new shopifyAPI({
-                shop: 'MYSHOP', // MYSHOP.myshopify.com
-                shopify_api_key: '', // Your API key
-                shopify_shared_secret: '', // Your Shared Secret
-                access_token: 'token', //permanent token
-            });
+  shop: 'MYSHOP', // MYSHOP.myshopify.com
+  shopify_api_key: '', // Your API key
+  shopify_shared_secret: '', // Your Shared Secret
+  access_token: 'token', //permanent token
+});
 
 ```
 
@@ -131,8 +137,8 @@ function callback(err, data, headers) {
 
 ```js
 Shopify.get('/admin/products.json', function(err, data, headers){
-    console.log(data); // Data contains product json information
-    console.log(headers); // Headers returned from request
+  console.log(data); // Data contains product json information
+  console.log(headers); // Headers returned from request
 });
 ```
 
@@ -183,7 +189,7 @@ Shopify.put('/admin/products/1234567.json', put_data, function(err, data, header
 
 ```js
 Shopify.delete('/admin/products/1234567.json', function(err, data, headers){
-    console.log(data);
+  console.log(data);
 });
 ```
 
@@ -214,12 +220,12 @@ The module utilizes the *is_valid_signature* function to verify that requests co
 ```js
 ShopifyAPI.prototype.exchange_temporary_token = function(query_params, callback) {
 
-    # Return an error if signature is not valid
-    if (!self.is_valid_signature(query_params)) {
-        return callback(new Error("Signature is not authentic!"));
-    }
+  // Return an error if signature is not valid
+  if (!self.is_valid_signature(query_params)) {
+    return callback(new Error("Signature is not authentic!"));
+  }
 
-    ...
+  // do more things...
 }
 ```
 
@@ -242,7 +248,7 @@ By default, shopify-node-api will automatically wait if you approach Shopify's A
 
 ```js
 var config = {
-  ...
+  //...
   rate_limit_delay: 10000, // 10 seconds (in ms) => if Shopify returns 429 response code
   backoff: 35, // limit X of 40 API calls => default is 35 of 40 API calls
   backoff_delay: 1000 // 1 second (in ms) => wait 1 second if backoff option is exceeded
