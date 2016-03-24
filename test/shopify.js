@@ -229,6 +229,30 @@ describe('#get', function(){
        done();
      });
    });
+
+   it('should parse data argument into a querystring and append it to endpoint', function(done) {
+     var shopify_get = nock('https://myshop.myshopify.com')
+                         .get('/admin/products.json')
+												 .query(true)
+                         .reply(200, function(uri, reqBody) {
+                           return {uri: uri};
+                         });
+
+     var Shopify = shopifyAPI({
+       shop: 'myshop',
+       shopify_api_key: 'abc123',
+       shopify_shared_secret: 'asdf1234',
+       shopify_scope: 'write_products',
+       redirect_uri: 'http://localhost:3000/finish_auth',
+       verbose: false
+     });
+
+
+     Shopify.get('/admin/products.json', {page: 2, limit: 15}, function(err, data, headers){
+       expect(data.uri).to.equal('/admin/products.json?page=2&limit=15');
+       done();
+     });
+   });
 });
 
 describe('#post', function(){
