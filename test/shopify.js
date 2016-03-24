@@ -233,7 +233,7 @@ describe('#get', function(){
    it('should parse data argument into a querystring and append it to endpoint', function(done) {
      var shopify_get = nock('https://myshop.myshopify.com')
                          .get('/admin/products.json')
-												 .query(true)
+                         .query(true)
                          .reply(200, function(uri, reqBody) {
                            return {uri: uri};
                          });
