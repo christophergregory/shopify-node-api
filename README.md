@@ -136,11 +136,12 @@ function callback(err, data, headers) {
 ### GET
 
 ```js
-Shopify.get('/admin/products.json', function(err, data, headers){
+Shopify.get('/admin/products.json', query_data, function(err, data, headers){
   console.log(data); // Data contains product json information
   console.log(headers); // Headers returned from request
 });
 ```
+The argument `query_data` is optional. If included it will be converted to a querystring and appended to the uri.
 
 ### POST
 
