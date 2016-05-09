@@ -1,6 +1,6 @@
 {
   "name": "shopify-node-api",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "OAuth2 Module for Shopify API",
   "main": "./lib/shopify",
   "scripts": {
