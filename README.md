@@ -260,6 +260,7 @@ var config = {
 # Testing
 
 ~~~
+npm install
 npm test
 ~~~
 
