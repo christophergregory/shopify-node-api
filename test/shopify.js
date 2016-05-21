@@ -253,6 +253,72 @@ describe('#get', function(){
        done();
      });
    });
+   
+   it('should use error_description when available', function(done) {
+     var shopify_get = nock('https://myshop.myshopify.com')
+                         .get('/')
+                         .reply(400, function(uri, reqBody) {
+                           return {'error':'abc','error_description':'xyz'};
+                         });
+
+     var Shopify = shopifyAPI({
+       shop: 'myshop',
+       shopify_api_key: 'abc123',
+       shopify_shared_secret: 'asdf1234',
+       shopify_scope: 'write_products',
+       redirect_uri: 'http://localhost:3000/finish_auth',
+       verbose: false
+     });
+
+     Shopify.get('/', function(err, data, headers){
+       expect(err).to.deep.equal({ error: 'xyz', code: 400 });
+       done();
+     });
+   });
+   
+   it('should use error when error_description is not available', function(done) {
+     var shopify_get = nock('https://myshop.myshopify.com')
+                         .get('/')
+                         .reply(400, function(uri, reqBody) {
+                           return {'error':'abc'};
+                         });
+
+     var Shopify = shopifyAPI({
+       shop: 'myshop',
+       shopify_api_key: 'abc123',
+       shopify_shared_secret: 'asdf1234',
+       shopify_scope: 'write_products',
+       redirect_uri: 'http://localhost:3000/finish_auth',
+       verbose: false
+     });
+
+     Shopify.get('/', function(err, data, headers){
+       expect(err).to.deep.equal({ error: 'abc', code: 400 });
+       done();
+     });
+   });
+   
+   it('should use errors when error_description and error is not available', function(done) {
+     var shopify_get = nock('https://myshop.myshopify.com')
+                         .get('/')
+                         .reply(400, function(uri, reqBody) {
+                           return {'errors':'abc'};
+                         });
+
+     var Shopify = shopifyAPI({
+       shop: 'myshop',
+       shopify_api_key: 'abc123',
+       shopify_shared_secret: 'asdf1234',
+       shopify_scope: 'write_products',
+       redirect_uri: 'http://localhost:3000/finish_auth',
+       verbose: false
+     });
+
+     Shopify.get('/', function(err, data, headers){
+       expect(err).to.deep.equal({ error: 'abc', code: 400 });
+       done();
+     });
+   });
 });
 
 describe('#post', function(){
