@@ -194,6 +194,12 @@ Shopify.delete('/admin/products/1234567.json', function(err, data, headers){
 });
 ```
 
+## Errors
+
+Every response from Shopify's API is parsed and checked if it looks like an error. Three keys are used to determine an error response: 'error_description', 'error', and 'errors'. If any of these keys are found in the response, an error object will be made with the first found key's value as the error message and the response's status code as the error's code. This error object will be passed as the first parameter in the callback, along with the response JSON and response headers.
+
+If an error occurs while making a request, the callback will be passed an error object provided from `https` as the only parameter.
+
 ## OPTIONS
 
 
