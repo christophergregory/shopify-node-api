@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/sinechris/shopify-node-api",
   "dependencies": {
-    "crypto": "0.0.3",
     "json-bigint": "^0.1.4"
   },
   "devDependencies": {
