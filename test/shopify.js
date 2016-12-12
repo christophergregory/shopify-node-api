@@ -230,6 +230,35 @@ describe('#get', function(){
      });
    });
 
+   it('should accept an agent for https', function(done) {
+     var Agent = require('https').Agent;
+     var agent = new Agent({
+       keepAlive: true,
+       keepAliveMsecs: 1000 * 10,
+       maxSockets: 10,
+       maxFreeSockets: 10
+     });
+     var shopify_get = nock('https://myshop.myshopify.com')
+                         .get('/admin/orders.json')
+                         .reply(200, '{"id": 1}');
+
+     var Shopify = shopifyAPI({
+       shop: 'myshop',
+       shopify_api_key: 'abc123',
+       shopify_shared_secret: 'asdf1234',
+       shopify_scope: 'write_products',
+       redirect_uri: 'http://localhost:3000/finish_auth',
+       verbose: false,
+       agent: agent
+     });
+
+     Shopify.get('/admin/orders.json', function(err, data, headers, opts) {
+       expect(err).to.not.exist();
+       expect(opts.agent).to.equal(agent);
+       return done();
+     });
+   });
+
    it('should parse data argument into a querystring and append it to endpoint', function(done) {
      var shopify_get = nock('https://myshop.myshopify.com')
                          .get('/admin/products.json')
@@ -253,7 +282,7 @@ describe('#get', function(){
        done();
      });
    });
-   
+
    it('should use error_description when available', function(done) {
      var shopify_get = nock('https://myshop.myshopify.com')
                          .get('/')
@@ -275,7 +304,7 @@ describe('#get', function(){
        done();
      });
    });
-   
+
    it('should use error when error_description is not available', function(done) {
      var shopify_get = nock('https://myshop.myshopify.com')
                          .get('/')
@@ -297,7 +326,7 @@ describe('#get', function(){
        done();
      });
    });
-   
+
    it('should use errors when error_description and error is not available', function(done) {
      var shopify_get = nock('https://myshop.myshopify.com')
                          .get('/')
