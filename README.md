@@ -258,7 +258,8 @@ var config = {
   //...
   rate_limit_delay: 10000, // 10 seconds (in ms) => if Shopify returns 429 response code
   backoff: 35, // limit X of 40 API calls => default is 35 of 40 API calls
-  backoff_delay: 1000 // 1 second (in ms) => wait 1 second if backoff option is exceeded
+  backoff_delay: 1000, // 1 second (in ms) => wait 1 second if backoff option is exceeded
+  throw_error_on_rate_limit: false // if true an Error will be thrown on 429 response code
 }
 ```
 
