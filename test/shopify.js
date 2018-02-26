@@ -25,23 +25,34 @@ describe('Constructor Function: #shopifyAPI', function(){
 });
 
 describe('#buildAuthURL', function(){
+    it('builds correct string with supplied shop', function(){
+        var Shopify = new shopifyAPI({
+          shop: 'MYSHOP',
+          shopify_api_key: 'abc123',
+          shopify_shared_secret: 'asdf1234',
+          shopify_scope: 'write_products',
+          redirect_uri: 'http://localhost:3000/finish_auth',
+          nonce: 'abc123'
+        });
 
-    var Shopify = new shopifyAPI({
-                shop: 'MYSHOP',
-                shopify_api_key: 'abc123',
-                shopify_shared_secret: 'asdf1234',
-                shopify_scope: 'write_products',
-                redirect_uri: 'http://localhost:3000/finish_auth',
-                nonce: 'abc123'
-            });
-
-
-    it('builds correct string', function(){
         var auth_url = Shopify.buildAuthURL(),
             correct_auth_url = 'https://MYSHOP.myshopify.com/admin/oauth/authorize?client_id=abc123&scope=write_products&redirect_uri=http://localhost:3000/finish_auth&state=abc123';
         auth_url.should.equal(correct_auth_url);
     });
 
+    it('builds correct string without supplied shop', function(){
+        var Shopify = new shopifyAPI({
+          shopify_api_key: 'abc123',
+          shopify_shared_secret: 'asdf1234',
+          shopify_scope: 'write_products',
+          redirect_uri: 'http://localhost:3000/finish_auth',
+          nonce: 'abc123'
+        });
+
+        var auth_url = Shopify.buildAuthURL(),
+          correct_auth_url = 'https://myshopify.com/admin/oauth/authorize?client_id=abc123&scope=write_products&redirect_uri=http://localhost:3000/finish_auth&state=abc123';
+        auth_url.should.equal(correct_auth_url);
+    });
 });
 
 describe('#set_access_token', function(){
