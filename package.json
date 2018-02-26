@@ -1,5 +1,5 @@
 {
-  "name": "shopify-node-api",
+  "name": "@walkthechat/shopify-node-api",
   "version": "1.8.1",
   "description": "OAuth2 Module for Shopify API",
   "main": "./lib/shopify",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sinechris/shopify-node-api.git"
+    "url": "https://github.com/WalktheChat/shopify-node-api"
   },
   "keywords": [
     "Shopify",
@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/sinechris/shopify-node-api/issues"
   },
-  "homepage": "https://github.com/sinechris/shopify-node-api",
+  "homepage": "https://github.com/WalktheChat/shopify-node-api",
   "dependencies": {
     "json-bigint": "^0.1.4"
   },
