@@ -233,8 +233,8 @@ Available logging options:
     }
     ```
 
-    The above config results in only messages beginning as type *HEADER:* and *API_LIMIT:*
-    to be logged.
+    The above config results in only messages beginning as type **HEADER:** and
+    **API_LIMIT:** to be logged.
 
     This is a more ideal use case for a production server, where excessive
     body content logging may obstruct developers from isolating meaningful server
