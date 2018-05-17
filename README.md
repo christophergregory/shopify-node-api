@@ -225,20 +225,20 @@ Available logging options:
     * verbose_api_limit
     * verbose_body
 
-    ```js
-    var config = {
-      ...
-      verbose_headers: true,
-      verbose_api_limit: true
-    }
-    ```
+```js
+var config = {
+  ...
+  verbose_headers: true,
+  verbose_api_limit: true
+}
+```
 
-    The above config results in only messages beginning as type **HEADER:** and
-    **API_LIMIT:** to be logged.
+The above config results in only messages beginning as type __HEADER:__ and
+__API_LIMIT:__ to be logged.
 
-    This is a more ideal use case for a production server, where excessive
-    body content logging may obstruct developers from isolating meaningful server
-    data.
+This is a more ideal use case for a production server, where excessive
+body content logging may obstruct developers from isolating meaningful server
+data.
 
 ### Verify Shopify Request
 
