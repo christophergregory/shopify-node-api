@@ -214,6 +214,32 @@ var config = {
 }
 ```
 
+##### Additional Verbose Options
+
+If only a particular message type(s) is desired it may be specifically requested
+to override the standard verbose console logging.
+
+Available logging options:
+    * verbose_status
+    * verbose_headers
+    * verbose_api_limit
+    * verbose_body
+
+```js
+var config = {
+  ...
+  verbose_headers: true,
+  verbose_api_limit: true
+}
+```
+
+The above config results in only messages beginning as type __HEADER:__ and
+__API_LIMIT:__ to be logged.
+
+This is a more ideal use case for a production server, where excessive
+body content logging may obstruct developers from isolating meaningful server
+data.
+
 ### Verify Shopify Request
 
 **Note**: *This module has been updated to use HMAC parameter instead of the deprecated "signature"*.
