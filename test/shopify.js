@@ -1,7 +1,8 @@
 var should = require('chai').should(),
     expect = require('chai').expect,
     nock = require('nock'),
-    shopifyAPI = require('../lib/shopify.js');
+    shopifyAPI = require('../lib/shopify.js'),
+    zlib = require('zlib');
 
 describe('Constructor Function: #shopifyAPI', function(){
 
@@ -207,6 +208,37 @@ describe('#get', function(){
             done();
         });
 
+   });
+
+   it('should parse a gzip response', function(done){
+        var buf = new Buffer(JSON.stringify({ count: 2 }));
+        zlib.gzip(buf, function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          var shopify_get = nock('https://myshop.myshopify.com')
+            .get('/admin/products/count.json')
+            .reply(200, res, {
+              'X-Transfer-Length': String(res.length),
+              'Content-Length': undefined,
+              'Content-Encoding': 'gzip',
+              'Content-Type': 'application/json'
+            });
+  
+          var Shopify = shopifyAPI({
+              shop: 'myshop',
+              shopify_api_key: 'abc123',
+              shopify_shared_secret: 'asdf1234',
+              shopify_scope: 'write_products',
+              redirect_uri: 'http://localhost:3000/finish_auth',
+              verbose: false
+          });
+  
+          Shopify.get('/admin/products/count.json', function(err, data, headers){
+              expect(data).to.deep.equal({"count": 2});
+              done();
+          });
+        });
    });
 
    it('should parse a number too large for javascript into a string', function(done) {
