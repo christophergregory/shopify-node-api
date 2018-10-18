@@ -212,28 +212,32 @@ describe('#get', function(){
 
    it('should parse a gzip response', function(done){
         var buf = new Buffer(JSON.stringify({ count: 2 }));
-        var res = zlib.gzipSync(buf);
-        var shopify_get = nock('https://myshop.myshopify.com')
-          .get('/admin/products/count.json')
-          .reply(200, res, {
-            'X-Transfer-Length': String(res.length),
-            'Content-Length': undefined,
-            'Content-Encoding': 'gzip',
-            'Content-Type': 'application/json'
+        zlib.gzip(buf, function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          var shopify_get = nock('https://myshop.myshopify.com')
+            .get('/admin/products/count.json')
+            .reply(200, res, {
+              'X-Transfer-Length': String(res.length),
+              'Content-Length': undefined,
+              'Content-Encoding': 'gzip',
+              'Content-Type': 'application/json'
+            });
+  
+          var Shopify = shopifyAPI({
+              shop: 'myshop',
+              shopify_api_key: 'abc123',
+              shopify_shared_secret: 'asdf1234',
+              shopify_scope: 'write_products',
+              redirect_uri: 'http://localhost:3000/finish_auth',
+              verbose: false
           });
-
-        var Shopify = shopifyAPI({
-            shop: 'myshop',
-            shopify_api_key: 'abc123',
-            shopify_shared_secret: 'asdf1234',
-            shopify_scope: 'write_products',
-            redirect_uri: 'http://localhost:3000/finish_auth',
-            verbose: false
-        });
-
-        Shopify.get('/admin/products/count.json', function(err, data, headers){
-            expect(data).to.deep.equal({"count": 2});
-            done();
+  
+          Shopify.get('/admin/products/count.json', function(err, data, headers){
+              expect(data).to.deep.equal({"count": 2});
+              done();
+          });
         });
    });
 
