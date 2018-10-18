@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sinechris/shopify-node-api.git"
+    "url": "https://github.com/BKnights/shopify-node-api.git"
   },
   "keywords": [
     "Shopify",
@@ -19,9 +19,9 @@
   "author": "Chris Gregory <chris@sinelabs.com> (http://sinelabs.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sinechris/shopify-node-api/issues"
+    "url": "https://github.com/BKnights/shopify-node-api/issues"
   },
-  "homepage": "https://github.com/sinechris/shopify-node-api",
+  "homepage": "https://github.com/BKnights/shopify-node-api",
   "dependencies": {
     "json-bigint": "^0.1.4"
   },

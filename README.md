@@ -288,6 +288,17 @@ var config = {
 }
 ```
 
+Alternatively if you are working on a Shopify Plus or Gold project or if you get increased API limits from your Shopify rep you can use 'backoff_level' to specify at what fraction of bucket capacity your app should start backing off.
+
+```js
+var config = {
+  //...
+  rate_limit_delay: 10000, // 10 seconds (in ms) => if Shopify returns 429 response code
+  backoff_level: 0.85, // limit X/bucket size API calls => no default since 'backoff' is the default behaviour
+  backoff_delay: 1000 // 1 second (in ms) => wait 1 second if backoff option is exceeded
+}
+```
+
 # Become a Shopify App Developer
 
 [Join the Shopify Partner Program](https://app.shopify.com/services/partners/signup?ref=grenadeapps)
