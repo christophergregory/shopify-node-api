@@ -211,7 +211,7 @@ describe('#get', function(){
    });
 
    it('should parse a gzip response', function(done){
-        var buf = Buffer.from(JSON.stringify({ count: 2 }));
+        var buf = new Buffer(JSON.stringify({ count: 2 }));
         var res = zlib.gzipSync(buf);
         var shopify_get = nock('https://myshop.myshopify.com')
           .get('/admin/products/count.json')
