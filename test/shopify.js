@@ -700,3 +700,49 @@ describe('#delete', function(){
 
     });
 });
+
+describe('#graphql', function(){
+  it('should return correct response', function(done){
+
+      var graphql_data = {
+            query: '{shop{id}}',
+            variables: {}
+          }
+          response = {
+            data: {
+              shop: {
+                id: 'gid:\/\/shopify\/Shop\/1234567'
+              }
+            },
+            extensions: {
+              cost: {
+                requestedQueryCost: 1,
+                actualQueryCost: 1,
+                throttleStatus: {
+                  maximumAvailable: 1000.0,
+                  currentlyAvailable: 999,
+                  restoreRate: 50.0
+                }
+              }
+            }
+          };
+
+      var shopify_get = nock('https://myshop.myshopify.com')
+                          .post('/admin/api/graphql.json')
+                          .reply(200, response);
+
+      var Shopify = shopifyAPI({
+              shop: 'myshop',
+              shopify_api_key: 'abc123',
+              shopify_shared_secret: 'asdf1234',
+              shopify_scope: 'write_products',
+              redirect_uri: 'http://localhost:3000/finish_auth',
+              verbose: false
+          });
+
+      Shopify.post('/admin/api/graphql.json', graphql_data, function(err, data, headers){
+          expect(data).to.deep.equal(response);
+          done();
+      });
+  });
+});
