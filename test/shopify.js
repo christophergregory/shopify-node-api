@@ -740,7 +740,7 @@ describe('#graphql', function(){
               verbose: false
           });
 
-      Shopify.post('/admin/api/graphql.json', graphql_data, function(err, data, headers){
+      Shopify.graphql(graphql_data, function(err, data, headers){
           expect(data).to.deep.equal(response);
           done();
       });
