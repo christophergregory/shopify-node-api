@@ -298,7 +298,6 @@ var config = {
   backoff_delay: 1000 // 1 second (in ms) => wait 1 second if backoff option is exceeded
 }
 ```
-
 # Become a Shopify App Developer
 
 [Join the Shopify Partner Program](https://app.shopify.com/services/partners/signup?ref=grenadeapps)
