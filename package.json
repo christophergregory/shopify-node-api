@@ -3,6 +3,7 @@
   "version": "1.11.0",
   "description": "OAuth2 Module for Shopify API",
   "main": "./lib/shopify",
+  "types": "./shopify-node-api.d.ts",
   "scripts": {
     "test": "make test"
   },
